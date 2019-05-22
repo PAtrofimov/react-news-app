@@ -3,8 +3,12 @@
 }
 
 body {
-  background: rgba(0, 102, 255, 0.38);
-  font-family: sans-serif;
+  background: lightseagreen;
+    font-family: serif;
+}
+
+#root {
+  display: flex;
 }
 
 p {
@@ -14,10 +18,10 @@ p {
 .article {
   background: #fff;
   border: 1px solid rgba(0, 89, 181, 0.82);
-  width: 600px;
-  margin: 0 0 5px;
+  width: 70%;
+  margin: 0 0 10px;
   box-shadow: 2px 2px 5px -1px rgb(0, 81, 202);
-  padding: 3px 5px;
+  padding: 10px;
 }
 
 .news__author {
@@ -27,16 +31,35 @@ p {
 .news__count {
   margin: 10px 0 0 0;
   display: block;
+  width: 100%;
+  font-size: 1.2rem;
 }
+
+.news__wrapper {
+  margin-left: 15px;
+}
+
+.news {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
 .test-input {
   margin: 0 5px 5px 0;
 }
 
+h3 {
+    text-align: center;
+    width: 70%;
+    font-size: 1.5rem;
+}
+
 .add {
-  margin: 0 5px 5px 0;
-  width: 210px;
+  margin: 15px 5px 5px 0;
+  width: 30%;
   border: 1px dashed rgba(0, 89, 181, 0.82);
-  padding: 5px;
+  padding: 10px;
 }
 .add__author,
 .add__text,
@@ -47,18 +70,25 @@ p {
   padding: 5px;
   width: 94%;
   border: 1px solid rgba(0, 89, 181, 0.82);
+  line-height: 2rem;
 }
 .add__checkrule {
   border: none;
   font-size: 12px;
+  font-size: .9rem;
 }
 .add__btn {
   box-sizing: content-box;
   color: #fff;
   text-transform: uppercase;
   background: #007ddc;
+  width: 50%;
 }
 .add__btn:disabled {
   background: #ccc;
   color: #999;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.3);
 }

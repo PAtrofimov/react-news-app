@@ -33,7 +33,7 @@ class App extends React.Component {
   componentDidMount() {
     this.setState({ isLoading: true })
 
-    fetch('http://localhost:3000/data/newsData.json')
+    fetch(process.env.PUBLIC_URL + '/data/newsData.json')
       .then(response => response.json())
       .then(data => {
         console.log(data)
@@ -48,9 +48,11 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Add onAddNews={this.handleAddNews} />
+        <div className="news__wrapper">
         <h3>Новости</h3>
         {isLoading && <p>Загружаю...</p>}
         {Array.isArray(news) && <News data={news} />}
+        </div>
       </React.Fragment>
     )
   }
