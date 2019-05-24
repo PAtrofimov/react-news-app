@@ -3,14 +3,21 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class News extends React.Component {
-  
   renderNews = () => {
-    const { data } = this.props
+    const { data, onRemoveNews, onSaveNews, onLikeNews } = this.props
     let newsTemplate = null
 
     if (data.length) {
       newsTemplate = data.map(function(item) {
-        return <Article key={item.id} data={item} />
+        return (
+          <Article
+            key={item.id}
+            data={item}
+            onRemoveNews={onRemoveNews}
+            onSaveNews={onSaveNews}
+            onLikeNews={onLikeNews}
+          />
+        )
       })
     } else {
       newsTemplate = <p>К сожалению новостей нет</p>

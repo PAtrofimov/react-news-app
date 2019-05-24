@@ -7,6 +7,7 @@ class App extends React.Component {
   state = {
     news: null,
     isLoading: false,
+    error: '',
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -26,8 +27,33 @@ class App extends React.Component {
   }
 
   handleAddNews = data => {
+    if ([...this.state.news].find(item => data.bigText === item.bigText)) {
+      this.setState({ error: 'This is not unique new!' })
+      return
+    }
+
     const nextNews = [data, ...this.state.news]
+    this.setState({ news: nextNews, error: '' })
+  }
+
+  handleRemoveNews = id => {
+    const nextNews = [...this.state.news].filter(news => news.id !== id)
     this.setState({ news: nextNews })
+  }
+
+  handleSaveNews = (bigText, text, id) => {
+    const news = [...this.state.news]
+    const oneNew = news.find(news => news.id === +id)
+    oneNew.bigText = bigText
+    oneNew.text = text
+    this.setState({ news })
+  }
+
+  handleLikeNews = id => {
+    const news = [...this.state.news]
+    const oneNew = news.find(news => news.id === +id)
+    oneNew.rating++
+    this.setState({ news })
   }
 
   componentDidMount() {
@@ -44,14 +70,22 @@ class App extends React.Component {
   }
 
   render() {
-    const { news, isLoading } = this.state
+    const { news, isLoading, error } = this.state
     return (
       <React.Fragment>
         <Add onAddNews={this.handleAddNews} />
         <div className="news__wrapper">
-        <h3>Новости</h3>
-        {isLoading && <p>Загружаю...</p>}
-        {Array.isArray(news) && <News data={news} />}
+          <h3>Новости</h3>
+          {isLoading && <p>Загружаю...</p>}
+          {error && <p className="error">{error}</p>}
+          {Array.isArray(news) && (
+            <News
+              data={news}
+              onRemoveNews={this.handleRemoveNews}
+              onSaveNews={this.handleSaveNews}
+              onLikeNews={this.handleLikeNews}
+            />
+          )}
         </div>
       </React.Fragment>
     )
