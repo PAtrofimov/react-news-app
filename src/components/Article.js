@@ -42,7 +42,6 @@ class Article extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     const { author, text, bigText, id, rating } = this.props.data
     const { visible, isEditing } = this.state
     return (
@@ -54,7 +53,7 @@ class Article extends React.Component {
           className="like__link"
           id={id}
         >
-          Нравится: {rating}
+          Оценка: {rating}
         </a>
         {isEditing ? (
           <textarea

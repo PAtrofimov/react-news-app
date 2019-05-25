@@ -38,7 +38,7 @@ class App extends React.Component {
 
   handleRemoveNews = id => {
     const nextNews = [...this.state.news].filter(news => news.id !== id)
-    this.setState({ news: nextNews })
+    this.setState({ news: nextNews, error: '' })
   }
 
   handleSaveNews = (bigText, text, id) => {
@@ -46,14 +46,17 @@ class App extends React.Component {
     const oneNew = news.find(news => news.id === +id)
     oneNew.bigText = bigText
     oneNew.text = text
-    this.setState({ news })
+    this.setState({ news, error: '' })
   }
 
   handleLikeNews = id => {
     const news = [...this.state.news]
     const oneNew = news.find(news => news.id === +id)
     oneNew.rating++
-    this.setState({ news })
+    if (oneNew.rating > 5) {
+      oneNew.rating = 0
+    }
+    this.setState({ news, error: '' })
   }
 
   componentDidMount() {
@@ -64,7 +67,7 @@ class App extends React.Component {
       .then(data => {
         console.log(data)
         setTimeout(() => {
-          this.setState({ isLoading: false, news: data })
+          this.setState({ isLoading: false, news: data, error: '' })
         }, 3000)
       })
   }
